@@ -1,0 +1,5 @@
+{
+  "name": "StudentPay Back-office",
+  "description": "Une application mobile de gestion de monnaie électronique pour étudiants, permettant les dépôts, transferts et la consultation de solde.",
+  "requestFramePermissions": []
+}
