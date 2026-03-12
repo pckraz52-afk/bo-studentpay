@@ -11,7 +11,13 @@
   "dependencies": {
     "lucide-react": "^0.555.0",
     "react": "^19.2.0",
-    "react-dom": "^19.2.0"
+    "react-dom": "^19.2.0",
+    "chart.js": "^4.4.0",
+    "react-chartjs-2": "^5.2.0"
+    ,"echarts": "^5.5.2",
+    "echarts-for-react": "^3.0.2",
+    "echarts-gl": "^2.0.9",
+    "qrcode": "^1.5.1"
   },
   "devDependencies": {
     "@types/node": "^22.14.0",
