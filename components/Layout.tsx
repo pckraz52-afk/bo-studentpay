@@ -26,13 +26,15 @@ const PAGE_TITLES: Record<string, string> = {
   'deposit-list': 'Liste des dépôts reçus',
   dashboards: 'Dashboards',
   'dashboard-evolution-depot': 'Évolution dépôts',
+  'dashboard-recettes': 'Graphique recettes',
   'dashboard-evolution-users': 'Évolution utilisateurs',
+  'recettes-cantine': 'Recettes cantine',
   'generate-qr': 'Générer QR code',
 };
 
 const Layout: React.FC<LayoutProps> = ({ children, activeTab, onTabChange, onLogout }) => {
 
-  const dashboardSubIds = ['dashboard-evolution-depot', 'dashboard-evolution-users'];
+  const dashboardSubIds = ['dashboard-evolution-depot', 'dashboard-recettes', 'recettes-cantine', 'dashboard-evolution-users'];
 
   const [openSections, setOpenSections] = useState<Record<string, boolean>>({
     gestion: true,
@@ -152,12 +154,14 @@ const Layout: React.FC<LayoutProps> = ({ children, activeTab, onTabChange, onLog
           <Section sectionKey="operations" label="Opérations">
             <NavItem id="deposit"      label="Recevoir un dépôt"      icon={ArrowDownLeft} />
             <NavItem id="deposit-list" label="Liste des dépôts reçus" icon={ListOrdered} />
+            <NavItem id="recettes-cantine" label="Recettes cantine" icon={ListOrdered} />
           </Section>
 
           <Section sectionKey="dashboards" label="Tableaux de bord">
             <NavItem id="dashboards" label="Graphiques" icon={LayoutDashboard} />
             <div className="border-l border-slate-700 ml-5 pl-1 mt-0.5 space-y-0.5">
               <NavItem id="dashboard-evolution-depot"  label="Évolution dépôts"       icon={TrendingUp} indent />
+                <NavItem id="dashboard-recettes" label="Graphique recettes" icon={TrendingUp} indent />
               <NavItem id="dashboard-evolution-users"  label="Évolution utilisateurs" icon={Users}      indent />
             </div>
           </Section>
