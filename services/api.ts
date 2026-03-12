@@ -25,7 +25,34 @@ let MOCK_WALLETS: Wallet[] = [
   { id: 'w_u3_01', userId: 'u3', balance: 250000, currency: 'Ar' }
 ];
 
-let MOCK_TRANSACTIONS: Transaction[] = [];
+// Transactions de démo pré-peuplées pour que ReceivedDeposits affiche des données
+let MOCK_TRANSACTIONS: Transaction[] = [
+  {
+    id: 'tx_demo_1',
+    destinationWalletId: 'w_u2_01',
+    amount: 5000,
+    type: TransactionType.DEPOSIT,
+    createdAt: new Date(Date.now() - 1000 * 60 * 60 * 2).toISOString(),
+    description: 'Dépôt initial étudiant'
+  },
+  {
+    id: 'tx_demo_2',
+    destinationWalletId: 'w_u3_01',
+    amount: 50000,
+    type: TransactionType.DEPOSIT,
+    createdAt: new Date(Date.now() - 1000 * 60 * 60 * 24).toISOString(),
+    description: 'Salaire enseignant'
+  },
+  {
+    id: 'tx_demo_3',
+    sourceWalletId: 'w_u2_01',
+    destinationWalletId: 'w_u3_01',
+    amount: 2000,
+    type: TransactionType.TRANSFER,
+    createdAt: new Date(Date.now() - 1000 * 60 * 30).toISOString(),
+    description: 'Transfert étudiant → prof'
+  }
+];
 
 // Helper pour simuler une latence réseau
 const delay = (ms: number) => new Promise(res => setTimeout(res, ms));
@@ -103,16 +130,37 @@ async function getMockResponse<T>(url: string, options: RequestInit | undefined)
     throw new Error("Wallet introuvable (Mock)");
   }
 
-  // 4. TRANSACTIONS
+  // 4. TRANSACTIONS — GET tous (avec filtre optionnel ?type=...)
+  // FIX : nouvelle route pour ReceivedDeposits — doit être testée AVANT /:walletId
+  if (url.includes('/transactions') && !url.match(/\/transactions\/\w/) && (!options?.method || options?.method === 'GET')) {
+    const urlObj = new URL(url, 'http://localhost');
+    const typeFilter = urlObj.searchParams.get('type');
+    const result = typeFilter
+      ? MOCK_TRANSACTIONS.filter(tx => tx.type === typeFilter)
+      : MOCK_TRANSACTIONS;
+    return result as unknown as T;
+  }
+
+  // 4b. TRANSACTIONS — POST (création)
   if (url.endsWith('/transactions') && options?.method === 'POST') {
     const body = JSON.parse(options?.body as string);
     const wallet = MOCK_WALLETS.find(w => w.id === body.destinationWalletId);
     if (wallet && body.type === TransactionType.DEPOSIT) {
       wallet.balance += body.amount;
     }
-    const newTx = { ...body, id: `tx_${Date.now()}`, createdAt: new Date().toISOString() };
+    const newTx: Transaction = { ...body, id: `tx_${Date.now()}`, createdAt: new Date().toISOString() };
     MOCK_TRANSACTIONS.push(newTx);
     return newTx as unknown as T;
+  }
+
+  // 4c. TRANSACTIONS — GET historique par walletId
+  // Route : GET /transactions/:walletId
+  if (url.includes('/transactions/') && (!options?.method || options?.method === 'GET')) {
+    const walletId = url.split('/').pop();
+    const history = MOCK_TRANSACTIONS.filter(
+      tx => tx.destinationWalletId === walletId || tx.sourceWalletId === walletId
+    );
+    return history as unknown as T;
   }
 
   return {} as T;
@@ -143,8 +191,6 @@ async function fetchJson<T>(url: string, options?: RequestInit): Promise<T> {
     // INTERCEPTION DE L'ERREUR POUR BASCULER EN MODE MOCK
     console.warn(`[API] Échec de connexion à ${url}. Cause: ${err}`);
     console.warn("[API] Basculement automatique sur les données de DÉMO (Mock Data).");
-
-    // On retourne la réponse simulée
     return getMockResponse<T>(url, options);
   }
 }
@@ -152,7 +198,6 @@ async function fetchJson<T>(url: string, options?: RequestInit): Promise<T> {
 export const api = {
   auth: {
     login: (email: string, pass: string) => {
-      // Note: L'API attend "mail" et "mot de passe"
       return fetchJson<User>(`${URLS.USERS}/auth/login`, {
         method: 'POST',
         body: JSON.stringify({ "mail": email, "mot de passe": pass })
@@ -190,12 +235,24 @@ export const api = {
     })
   },
   transactions: {
-    create: (data: { amount: number, type: TransactionType, sourceWalletId?: string, destinationWalletId: string, description: string }) =>
+    // FIX : nouvel appel pour récupérer toutes les transactions avec filtre optionnel
+    // Utilisé par ReceivedDeposits : api.transactions.getAll({ type: TransactionType.DEPOSIT })
+    getAll: (params?: { type?: TransactionType }) => {
+      const query = params?.type ? `?type=${params.type}` : '';
+      return fetchJson<Transaction[]>(`${URLS.TRANSACTIONS}/transactions${query}`);
+    },
+    create: (data: {
+      amount: number;
+      type: TransactionType;
+      sourceWalletId?: string;
+      destinationWalletId: string;
+      description: string;
+    }) =>
       fetchJson<Transaction>(`${URLS.TRANSACTIONS}/transactions`, {
         method: 'POST',
         body: JSON.stringify(data)
       }),
-
-    getHistory: (walletId: string) => fetchJson<Transaction[]>(`${URLS.TRANSACTIONS}/transactions/${walletId}`)
+    getHistory: (walletId: string) =>
+      fetchJson<Transaction[]>(`${URLS.TRANSACTIONS}/transactions/${walletId}`)
   }
 };
