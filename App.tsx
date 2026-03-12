@@ -9,6 +9,8 @@ import ReceivedDeposits from './components/ReceivedDeposits';
 import DashboardEvolutionDepot from './components/DashboardEvolutionDepot';
 import DashboardEvolutionUsers from './components/DashboardEvolutionUsers';
 import GenerateQr from './components/GenerateQr';
+import RecettesCantine from './components/RecettesCantine';
+import DashboardRecettes from './components/DashboardRecettes';
 
 // --- MAIN APP ---
 
@@ -43,6 +45,8 @@ const App: React.FC = () => {
       {activeTab === 'deposit-list' && <ReceivedDeposits />}
       {activeTab === 'dashboards' && <div><h3 className="text-2xl font-bold">Dashboards</h3></div>}
       {activeTab === 'dashboard-evolution-depot' && <DashboardEvolutionDepot />}
+      {activeTab === 'recettes-cantine' && <RecettesCantine />}
+      {activeTab === 'dashboard-recettes' && <DashboardRecettes />}
       {activeTab === 'dashboard-evolution-users' && <DashboardEvolutionUsers />}
       {activeTab === 'generate-qr' && <GenerateQr />}
     </Layout>
