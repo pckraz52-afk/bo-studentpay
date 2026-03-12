@@ -8,8 +8,8 @@ interface LoginScreenProps {
 }
 
 const LoginScreen: React.FC<LoginScreenProps> = ({ onLogin }) => {
-  const [email, setEmail] = useState('admin@studentpay.com');
-  const [password, setPassword] = useState('1234');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
