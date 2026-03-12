@@ -52,6 +52,7 @@ const Layout: React.FC<LayoutProps> = ({ children, activeTab, onTabChange, onLog
           <div className="text-xs font-bold text-slate-500 uppercase px-4 mb-2 mt-6">Opérations</div>
           
           <NavItem id="deposit" label="Recevoir un Dépôt" icon={ArrowDownLeft} />
+           <NavItem id="deposit-list" label="Liste des dépôts reçus" icon={LayoutDashboard} />
         </nav>
 
         {/* Footer / Logout */}
