@@ -6,6 +6,9 @@ import UsersManager from './components/UsersManager';
 import WalletsManager from './components/WalletsManager';
 import DepositManager from './components/DepositManager';
 import ReceivedDeposits from './components/ReceivedDeposits';
+import DashboardEvolutionDepot from './components/DashboardEvolutionDepot';
+import DashboardEvolutionUsers from './components/DashboardEvolutionUsers';
+import GenerateQr from './components/GenerateQr';
 
 // --- MAIN APP ---
 
@@ -38,6 +41,10 @@ const App: React.FC = () => {
       {activeTab === 'wallets' && <WalletsManager />}
       {activeTab === 'deposit' && <DepositManager />}
       {activeTab === 'deposit-list' && <ReceivedDeposits />}
+      {activeTab === 'dashboards' && <div><h3 className="text-2xl font-bold">Dashboards</h3></div>}
+      {activeTab === 'dashboard-evolution-depot' && <DashboardEvolutionDepot />}
+      {activeTab === 'dashboard-evolution-users' && <DashboardEvolutionUsers />}
+      {activeTab === 'generate-qr' && <GenerateQr />}
     </Layout>
   );
 };
