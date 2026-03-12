@@ -5,6 +5,7 @@ import LoginScreen from './components/LoginScreen';
 import UsersManager from './components/UsersManager';
 import WalletsManager from './components/WalletsManager';
 import DepositManager from './components/DepositManager';
+import ReceivedDeposits from './components/ReceivedDeposits';
 
 // --- MAIN APP ---
 
@@ -36,6 +37,7 @@ const App: React.FC = () => {
       {activeTab === 'users' && <UsersManager />}
       {activeTab === 'wallets' && <WalletsManager />}
       {activeTab === 'deposit' && <DepositManager />}
+      {activeTab === 'deposit-list' && <ReceivedDeposits />}
     </Layout>
   );
 };
