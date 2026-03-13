@@ -147,7 +147,7 @@ const DashboardEvolutionUsers: React.FC = () => {
 
   return (
     <div>
-      <h3 className="text-2xl font-bold mb-1">Évolution nombre utilisateurs</h3>
+      <h3 className="text-2xl font-bold mb-1">Nombre utilisateurs actifs</h3>
       <p className="text-sm text-gray-500 mb-4">Nombre d'utilisateurs inscrits sur la période sélectionnée.</p>
 
       <div className="bg-white rounded-xl p-5 shadow-sm border border-slate-100" style={{ minHeight: 340 }}>
@@ -231,3 +231,4 @@ const DashboardEvolutionUsers: React.FC = () => {
 };
 
 export default DashboardEvolutionUsers;
+
