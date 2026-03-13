@@ -28,7 +28,7 @@ const GenerateQr: React.FC = () => {
 
   return (
     <div>
-      <h2 className="text-2xl font-bold mb-4">Générer QR code</h2>
+      <h2 className="text-2xl font-bold mb-4">Génération QR code</h2>
 
       <div className="mb-4 max-w-md">
         <label className="block text-sm font-medium text-slate-700 mb-2">Texte / URL</label>
@@ -81,3 +81,5 @@ const GenerateQr: React.FC = () => {
 };
 
 export default GenerateQr;
+
+
