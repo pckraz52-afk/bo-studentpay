@@ -131,7 +131,7 @@ const DepositManager: React.FC = () => {
 
     return (
         <div className="p-4 max-w-lg mx-auto mt-6">
-            <h2 className="text-xl font-bold text-slate-800 mb-6 text-center">Dépôt d'Espèces</h2>
+            <h2 className="text-xl font-bold text-slate-800 mb-6 text-center">Enregistrer un dépôt d'espèces</h2>
 
             <div className="bg-white p-6 rounded-2xl shadow-sm border border-gray-200 space-y-6">
                 
