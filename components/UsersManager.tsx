@@ -18,11 +18,11 @@ const UsersManager: React.FC = () => {
     nom: '',
     email: '',
     passwd: '',
-    type: 'student',
+    type: '',
     adresse: '',
     num_CIN: '',
-    role: 'user',
-    type_utilisateur: 'standard'
+    role: '',
+    type_utilisateur: ''
   });
   const PASSWORD_PLACEHOLDER = '********';
 
@@ -84,7 +84,7 @@ const UsersManager: React.FC = () => {
       }
       setShowModal(false);
       setEditingUser(null);
-      setFormData({ nom: '', email: '', passwd: '', type: 'student', adresse: '', num_CIN: '', role: 'user', type_utilisateur: 'standard' });
+      setFormData({ nom: '', email: '', passwd: '', type: 'student', adresse: '', num_CIN: '', role: '', type_utilisateur: '' });
       loadUsers();
     } catch (e) {
       alert("Erreur lors de l'enregistrement");
@@ -100,15 +100,15 @@ const UsersManager: React.FC = () => {
       type: u.type || 'student',
       adresse: u.adresse || '',
       num_CIN: u.num_CIN || '',
-      role: u.role || 'user',
-      type_utilisateur: u.type_utilisateur || 'standard'
+      role: u.role || '',
+      type_utilisateur: u.type_utilisateur || ''
     });
     setShowModal(true);
   };
 
   const openCreate = () => {
     setEditingUser(null);
-    setFormData({ nom: '', email: '', passwd: '', type: 'student', adresse: '', num_CIN: '', role: 'user', type_utilisateur: 'standard' });
+    setFormData({ nom: '', email: '', passwd: '', type: 'student', adresse: '', num_CIN: '', role: '', type_utilisateur: '' });
     setShowModal(true);
   };
 
