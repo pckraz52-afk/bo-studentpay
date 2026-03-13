@@ -39,34 +39,51 @@ const RecettesCantine: React.FC = () => {
       {error && <div className="text-sm text-red-500">Erreur: {error}</div>}
 
       {!loading && !error && (
-        <div>
-          <div className="mb-4 flex items-center justify-between">
-            <div className="text-sm text-slate-600">Nombre de transactions: <strong>{transactions.length}</strong></div>
-            <div className="text-lg font-semibold">Total: {total.toLocaleString()} Ar</div>
+        <div className="max-w-md">
+          <div className="mb-4">
+            <div className="text-sm text-slate-600 mb-2">Nombre de transactions: <strong>{transactions.length}</strong></div>
+
+            {/* Small invisible table to align the total above the 'Montant' column dynamically */}
+            <div className="w-full mb-2">
+              <table className="w-full table-auto">
+                <thead className="sr-only">
+                  <tr>
+                    <th />
+                    <th />
+                    <th />
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td />
+                    <td />
+                    <td className="text-right text-lg font-semibold">Total: {total.toLocaleString()} Ar</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
           </div>
 
           <div className="bg-white border border-slate-200 rounded-lg overflow-hidden">
-            <table className="w-full text-left table-auto">
+            <table className="table-auto text-left">
               <thead className="bg-slate-50">
                 <tr>
                   <th className="px-4 py-2 text-sm text-slate-500">Date</th>
                   <th className="px-4 py-2 text-sm text-slate-500">Description</th>
-                  <th className="px-4 py-2 text-sm text-slate-500">Montant</th>
-                  <th className="px-4 py-2 text-sm text-slate-500">Wallet</th>
+                  <th className="px-4 py-2 text-sm text-slate-500 text-right">Montant</th>
                 </tr>
               </thead>
               <tbody>
                 {transactions.map(tx => (
                   <tr key={tx.id} className="border-t">
-                    <td className="px-4 py-3 text-sm text-slate-600">{tx.createdAt ? format(new Date(tx.createdAt), 'yyyy-MM-dd HH:mm') : '-'}</td>
+                    <td className="px-4 py-3 text-sm text-slate-600">{tx.createdAt ? format(new Date(tx.createdAt), 'dd/MM/yy') : '-'}</td>
                     <td className="px-4 py-3 text-sm text-slate-700">{tx.description || '-'}</td>
-                    <td className="px-4 py-3 text-sm text-slate-800">{(tx.amount || 0).toLocaleString()} Ar</td>
-                    <td className="px-4 py-3 text-sm text-slate-600">{tx.sourceWalletId || tx.destinationWalletId || '-'}</td>
+                    <td className="px-4 py-3 text-sm text-slate-800 text-right">{(tx.amount || 0).toLocaleString()}</td>
                   </tr>
                 ))}
                 {transactions.length === 0 && (
                   <tr>
-                    <td colSpan={4} className="px-4 py-6 text-center text-sm text-slate-500">Aucune transaction trouvée.</td>
+                    <td colSpan={3} className="px-4 py-6 text-center text-sm text-slate-500">Aucune transaction trouvée.</td>
                   </tr>
                 )}
               </tbody>
@@ -79,3 +96,5 @@ const RecettesCantine: React.FC = () => {
 };
 
 export default RecettesCantine;
+
+
