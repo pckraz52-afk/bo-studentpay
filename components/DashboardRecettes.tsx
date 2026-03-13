@@ -152,8 +152,8 @@ const DashboardRecettes: React.FC = () => {
 
   return (
     <div>
-      <h3 className="text-2xl font-bold mb-1">Graphique recettes</h3>
-      <p className="text-sm text-gray-500 mb-4">Graphique des recettes cantine (transactions de type payment) sur la période sélectionnée.</p>
+      <h3 className="text-2xl font-bold mb-1">Recettes cantine</h3>
+      <p className="text-sm text-gray-500 mb-4">Encaissements de la cantine sur la période sélectionnée.</p>
 
       <div className="bg-white rounded-xl p-5 shadow-sm border border-slate-100" style={{ minHeight: 340 }}>
         {/* Header row */}
@@ -236,3 +236,6 @@ const DashboardRecettes: React.FC = () => {
 };
 
 export default DashboardRecettes;
+
+
+
