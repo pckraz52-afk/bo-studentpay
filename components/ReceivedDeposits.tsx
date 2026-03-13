@@ -54,7 +54,7 @@ const ReceivedDeposits: React.FC = () => {
   return (
     <div className="p-4">
       <div className="bg-white p-6 rounded-2xl shadow-sm border border-gray-200">
-        <h3 className="text-lg font-bold mb-4">Liste des dépôts reçus</h3>
+        <h3 className="text-lg font-bold mb-4">Dépôts reçus</h3>
 
         {loading && <p className="text-sm text-gray-500">Chargement...</p>}
         {error && <p className="text-sm text-red-500">{error}</p>}
@@ -68,8 +68,7 @@ const ReceivedDeposits: React.FC = () => {
                 <thead>
                   <tr className="text-left text-gray-500 border-b">
                     <th className="py-2 pr-4">Date</th>
-                    <th className="py-2 pr-4">Utilisateur</th>
-                    <th className="py-2 pr-4">Wallet</th>
+                    <th className="py-2 pr-4">Reçu de</th>
                     <th className="py-2 pr-4">Montant</th>
                     <th className="py-2">Description</th>
                   </tr>
@@ -85,17 +84,10 @@ const ReceivedDeposits: React.FC = () => {
                           {tx.createdAt ? new Date(tx.createdAt).toLocaleString() : '—'}
                         </td>
                         <td className="py-3 pr-4">
-                          {user
-                            ? `${user.nom} (${user.email})`
-                            : wallet
-                            ? wallet.userId
-                            : '—'}
-                        </td>
-                        <td className="py-3 pr-4 font-mono text-xs text-gray-600">
-                          {wallet ? wallet.id : (tx.destinationWalletId || '—')}
+                          {user ? user.nom : wallet ? wallet.userId : '—'}
                         </td>
                         <td className="py-3 pr-4 font-bold text-green-600">
-                          +{tx.amount.toLocaleString()} {wallet?.currency ?? ''}
+                          +{tx.amount.toLocaleString()}
                         </td>
                         <td className="py-3 text-gray-600">
                           {tx.description || '—'}
