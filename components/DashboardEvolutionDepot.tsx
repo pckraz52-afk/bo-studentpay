@@ -152,8 +152,8 @@ const DashboardEvolutionDepot: React.FC = () => {
 
   return (
     <div>
-      <h3 className="text-2xl font-bold mb-1">Évolution dépôts</h3>
-      <p className="text-sm text-gray-500 mb-4">Évolution des montants déposés sur la période sélectionnée.</p>
+      <h3 className="text-2xl font-bold mb-1">Dépôts espèces</h3>
+      <p className="text-sm text-gray-500 mb-4">Montants déposés sur la période sélectionnée.</p>
 
       <div className="bg-white rounded-xl p-5 shadow-sm border border-slate-100" style={{ minHeight: 340 }}>
         {/* Header row */}
