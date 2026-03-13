@@ -22,14 +22,14 @@ interface LayoutProps {
 const PAGE_TITLES: Record<string, string> = {
   users: 'Gestion des utilisateurs',
   wallets: 'Gestion des portefeuilles',
-  deposit: 'Recevoir un dépôt',
-  'deposit-list': 'Liste des dépôts reçus',
+  deposit: 'Dépôts',
+  'deposit-list': 'Dépôts',
   dashboards: 'Dashboards',
-  'dashboard-evolution-depot': 'Évolution dépôts',
-  'dashboard-recettes': 'Graphique recettes',
-  'dashboard-evolution-users': 'Évolution utilisateurs',
-  'recettes-cantine': 'Recettes cantine',
-  'generate-qr': 'Générer QR code',
+  'dashboard-evolution-depot': 'Dépôts',
+  'dashboard-recettes': 'Recettes',
+  'dashboard-evolution-users': 'Utilisateurs',
+  'recettes-cantine': 'Recettes',
+  'generate-qr': 'QR code',
 };
 
 const Layout: React.FC<LayoutProps> = ({ children, activeTab, onTabChange, onLogout }) => {
@@ -148,12 +148,12 @@ const Layout: React.FC<LayoutProps> = ({ children, activeTab, onTabChange, onLog
 
           <Section sectionKey="gestion" label="Gestion">
             <NavItem id="users"   label="Utilisateurs"  icon={Users} />
-            <NavItem id="wallets" label="Portefeuilles" icon={WalletCards} />
+            <NavItem id="wallets" label="Wallets" icon={WalletCards} />
           </Section>
 
           <Section sectionKey="operations" label="Opérations">
-            <NavItem id="deposit"      label="Recevoir un dépôt"      icon={ArrowDownLeft} />
-            <NavItem id="deposit-list" label="Liste des dépôts reçus" icon={ListOrdered} />
+            <NavItem id="deposit"      label="Enregistrer dépôt"      icon={ArrowDownLeft} />
+            <NavItem id="deposit-list" label="Cash to wallets" icon={ListOrdered} />
             <NavItem id="recettes-cantine" label="Recettes cantine" icon={ListOrdered} />
           </Section>
 
@@ -161,7 +161,7 @@ const Layout: React.FC<LayoutProps> = ({ children, activeTab, onTabChange, onLog
             <NavItem id="dashboards" label="Graphiques" icon={LayoutDashboard} />
             <div className="border-l border-slate-700 ml-5 pl-1 mt-0.5 space-y-0.5">
               <NavItem id="dashboard-evolution-depot"  label="Évolution dépôts"       icon={TrendingUp} indent />
-                <NavItem id="dashboard-recettes" label="Graphique recettes" icon={TrendingUp} indent />
+                <NavItem id="dashboard-recettes" label="Évolution recettes" icon={TrendingUp} indent />
               <NavItem id="dashboard-evolution-users"  label="Évolution utilisateurs" icon={Users}      indent />
             </div>
           </Section>
